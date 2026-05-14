@@ -1,9 +1,4 @@
-/* ════════════════════════════════════════════════════
-   app.js — DealDrive Application Logic
-   Requires: jQuery, Bootstrap 5, data.js
-   ════════════════════════════════════════════════════ */
 
-/* ── STATE ───────────────────────────────────────────── */
 let saved      = JSON.parse(localStorage.getItem('dd_saved') || '[]');
 let cart       = JSON.parse(localStorage.getItem('dd_cart')  || '[]');
 let currentCar = null;

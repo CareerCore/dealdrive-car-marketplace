@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DealDrive — Premium Car Listings</title>
+
+<!-- ── External CDN Libraries ── -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+<!-- ── Custom Stylesheet ── -->
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg" id="topNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">Deal<span>Drive</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav me-auto ms-3">
+        <li class="nav-item"><button class="nav-link" id="navHomeBtn" style="background:transparent;border:none;cursor:pointer">Home</button></li>
+        <li class="nav-item"><a class="nav-link" href="#main-section">Browse</a></li>
+        <li class="nav-item"><button class="nav-link" id="navAboutBtn" style="background:transparent;border:none;cursor:pointer">About</button></li>
+        <li class="nav-item"><button class="nav-link" id="navContactBtn" style="background:transparent;border:none;cursor:pointer"><i class="bi bi-envelope me-1"></i>Contact</button></li>
+        <li class="nav-item"><button class="nav-link" id="navCartBtn" style="background:transparent;border:none;cursor:pointer"><i class="bi bi-cart me-1"></i>Cart</button></li>
+      </ul>
+      <button class="nav-link btn-saved-nav ms-2" id="openSaved">
+        <i class="bi bi-heart-fill"></i> Saved <span class="badge-count" id="savedCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO (VIDEO BACKGROUND) ───────────────────────── -->
+<section id="hero">
+  <canvas id="particles"></canvas>
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/video/2020/07/21/45066-444699613_large.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-center">
+    <div class="hero-content">
+      <span class="hero-tag">Pakistan's #1 Car Platform</span>
+      <h1 class="hero-h1">Drive Your<br/><em>Passion</em><br/>Forward.</h1>
+      <p class="hero-sub">Browse, compare, and enquire about Pakistan's finest vehicles — all in one place.</p>
+      <a href="#main-section" class="hero-btn">
+        <i class="bi bi-chevron-double-down"></i> Explore Collection
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><i class="bi bi-chevron-down"></i></div>
+</section>
+
+<!-- ─── MAIN CONTENT ───────────────────────────────────── -->
+<section id="main-section">
+  <div class="container">
+
+    <div class="text-center mb-5 fade-up">
+      <span class="sec-label">Premium Collection</span>
+      <div class="sec-title">World-Class <span>Automobiles</span></div>
+    </div>
+
+    <!-- TABS -->
+    <ul class="nav nav-tabs fade-up d1" id="mainTabs" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#t-all"><i class="bi bi-grid-3x3-gap me-1"></i>All Cars</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-sports"><i class="bi bi-lightning-charge me-1"></i>Sports</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-suv"><i class="bi bi-car-front me-1"></i>SUV</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-luxury"><i class="bi bi-gem me-1"></i>Luxury</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-electric"><i class="bi bi-battery-charging me-1"></i>Electric</button></li>
+      <!-- Hidden triggers for navbar JS -->
+      <li style="display:none"><button data-bs-toggle="tab" data-bs-target="#t-about" id="triggerAbout"></button></li>
+      <li style="display:none"><button data-bs-toggle="tab" data-bs-target="#t-contact" id="triggerContact"></button></li>
+      <li style="display:none"><button data-bs-toggle="tab" data-bs-target="#t-cart" id="triggerCart"></button></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- ALL CARS TAB -->
+      <div class="tab-pane fade show active" id="t-all">
+        <div class="filter-bar">
+          <input type="text" id="srch" class="flex-grow-1" placeholder="Search by name or brand..."/>
+          <select id="bFilter"><option value="">All Brands</option></select>
+          <select id="pFilter">
+            <option value="">Any Price</option>
+            <option value="0-15000000">Under Rs 15M</option>
+            <option value="15000000-45000000">Rs 15M – Rs 45M</option>
+            <option value="45000000-150000000">Rs 45M – Rs 150M</option>
+            <option value="150000000-9999999999">Rs 150M+</option>
+          </select>
+          <span class="res-count" id="rCount"></span>
+        </div>
+        <div class="row g-4" id="g-all"></div>
+      </div>
+
+      <!-- CATEGORY TABS -->
+      <div class="tab-pane fade" id="t-sports"><div class="row g-4" id="g-sports"></div></div>
+      <div class="tab-pane fade" id="t-suv"><div class="row g-4" id="g-suv"></div></div>
+      <div class="tab-pane fade" id="t-luxury"><div class="row g-4" id="g-luxury"></div></div>
+      <div class="tab-pane fade" id="t-electric"><div class="row g-4" id="g-electric"></div></div>
+
+      <!-- ABOUT TAB -->
+      <div class="tab-pane fade" id="t-about">
+        <div class="row g-4 mb-4">
+          <div class="col-md-4 fade-up d1">
+            <div class="about-card">
+              <div class="about-icon-slot"><i class="bi bi-car-front-fill about-icon" aria-hidden="true"></i></div>
+              <h5>ACCurated Listings</h5>
+              <p>Every car on DealDrive is carefully selected from trusted dealers across Pakistan — from budget-friendly options to exotic supercars.</p>
+            </div>
+          </div>
+          <div class="col-md-4 fade-up d2">
+            <div class="about-card">
+              <div class="about-icon-slot"><i class="bi bi-shield-fill-check about-icon" aria-hidden="true"></i></div>
+              <h5>Verified Prices</h5>
+              <p>All prices are regularly updated to reflect current market rates in Pakistani Rupees, so you always see accurate, up-to-date pricing.</p>
+            </div>
+          </div>
+          <div class="col-md-4 fade-up d3">
+            <div class="about-card">
+              <div class="about-icon-slot"><i class="bi bi-headset about-icon" aria-hidden="true"></i></div>
+              <h5>Easy Enquiry</h5>
+              <p>Found your dream car? Send a direct enquiry and our team will respond within 24 hours with full availability and pricing details.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4 mb-4">
+          <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num" data-count="12">0</div><div class="stat-lbl">Cars Listed</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num" data-count="9">0</div><div class="stat-lbl">Brands</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num" data-count="5">0</div><div class="stat-lbl">Categories</div></div></div>
+          <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num" data-count="24">0</div><div class="stat-lbl">Hr Response</div></div></div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 fade-up d1">
+            <div class="about-card">
+              <h5><i class="bi bi-list-ol me-2" style="color:var(--red)"></i>How It Works</h5>
+              <div class="mt-3">
+                <div class="how-step"><span class="step-num">01</span><span class="step-txt">Browse cars across all categories using tabs or search</span></div>
+                <div class="how-step"><span class="step-num">02</span><span class="step-txt">Click any card to view full specs and a detailed description</span></div>
+                <div class="how-step"><span class="step-num">03</span><span class="step-txt">Save favourites — they stay saved even after you refresh</span></div>
+                <div class="how-step"><span class="step-num">04</span><span class="step-txt">Add cars to your cart or send a direct enquiry</span></div>
+                <div class="how-step"><span class="step-num">05</span><span class="step-txt">Our team contacts you within 24 hours</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 fade-up d2">
+            <div class="about-card">
+              <h5><i class="bi bi-tags-fill me-2" style="color:var(--red)"></i>Browse by Category</h5>
+              <div class="row g-3 mt-2">
+                <div class="col-6"><div class="cat-box"><i class="bi bi-lightning-charge"></i><div class="cat-name">Sports</div><div class="cat-sub">High performance</div></div></div>
+                <div class="col-6"><div class="cat-box"><i class="bi bi-car-front"></i><div class="cat-name">SUV</div><div class="cat-sub">Space &amp; power</div></div></div>
+                <div class="col-6"><div class="cat-box"><i class="bi bi-gem"></i><div class="cat-name">Luxury</div><div class="cat-sub">Premium comfort</div></div></div>
+                <div class="col-6"><div class="cat-box"><i class="bi bi-battery-charging"></i><div class="cat-name">Electric</div><div class="cat-sub">Future of driving</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT TAB -->
+      <div class="tab-pane fade" id="t-contact">
+        <div class="content-wrap fade-up">
+          <h3 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:#fff;margin-bottom:4px">Get In <span style="color:var(--red)">Touch</span></h3>
+          <p class="mb-4" style="font-size:13px;color:rgba(255,255,255,.38)">Interested in a car? We'll get back to you within 24 hours.</p>
+          <div class="mb-3"><label class="form-label">Your Name</label><input type="text" class="form-control" id="cName" placeholder="Your full name"/></div>
+          <div class="mb-3"><label class="form-label">Email Address</label><input type="email" class="form-control" id="cEmail" placeholder="email@example.com"/></div>
+          <div class="mb-3"><label class="form-label">Car of Interest</label><select class="form-select" id="cCar"><option value="">Select a car...</option></select></div>
+          <div class="mb-4"><label class="form-label">Message</label><textarea class="form-control" id="cMsg" rows="4" placeholder="Tell us what you're looking for..."></textarea></div>
+          <button class="btn-submit" id="cSubmit"><i class="bi bi-send-fill me-2"></i>Send Enquiry</button>
+        </div>
+      </div>
+
+      <!-- CART TAB -->
+      <div class="tab-pane fade" id="t-cart">
+        <div class="content-wrap fade-up" style="max-width:800px">
+          <h3 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:#fff;margin-bottom:20px">Your <span style="color:var(--red)">Cart</span></h3>
+          <div id="cartBody"></div>
+          <div class="text-end mt-4">
+            <h4 id="cartTotal" style="color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:26px">Total: Rs 0</h4>
+            <button class="btn-submit mt-3" style="max-width:200px" id="checkoutBtn"><i class="bi bi-credit-card me-2"></i>Checkout</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-content -->
+  </div>
+</section>
+
+<!-- ─── DETAIL MODAL ────────────────────────────────────── -->
+<div class="modal fade" id="carModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div><div class="m-brand" id="mBrand"></div><h5 class="modal-title" id="mName"></h5></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <img id="mImg" src="" alt="" class="m-img"/>
+      <div class="modal-body">
+        <div class="m-price" id="mPrice"></div>
+        <p class="m-desc" id="mDesc"></p>
+        <div class="spec-grid" id="mSpecs"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ms" id="mSave"><i class="bi bi-heart me-1"></i>Save</button>
+        <button class="btn-me" id="mAddToCart" style="background:#27ae60"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+        <button class="btn-me" id="mEnquire" style="background:var(--red)"><i class="bi bi-envelope-fill me-1"></i>Enquire Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SAVED OFFCANVAS ────────────────────────────────── -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="savedCanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Saved Cars</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" id="savedBody"></div>
+</div>
+
+<!-- ─── CHECKOUT MODAL ──────────────────────────────────── -->
+<div class="modal fade" id="checkoutModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content checkout-modal-content">
+
+      <!-- Header -->
+      <div class="modal-header checkout-header">
+        <div>
+          <div class="checkout-step-label" id="checkoutStepLabel">Step 1 of 2</div>
+          <h5 class="modal-title checkout-title" id="checkoutTitle"><i class="bi bi-person-fill me-2"></i>Your Details</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body checkout-body">
+
+        <!-- ── STEP 1: User Details ── -->
+        <div id="checkoutStep1">
+          <div class="checkout-order-summary" id="checkoutSummary"></div>
+
+          <div class="checkout-section-title"><i class="bi bi-person-vcard me-2"></i>Personal Information</div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Full Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="coName" placeholder="Muhammad Faraz"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email Address <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="coEmail" placeholder="email@example.com"/>
+            </div>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+              <input type="tel" class="form-control" id="coPhone" placeholder="03XX-XXXXXXX"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">City <span class="text-danger">*</span></label>
+              <select class="form-select" id="coCity">
+                <option value="">Select city...</option>
+                <option>Karachi</option>
+                <option>Lahore</option>
+                <option>Islamabad</option>
+                <option>Rawalpindi</option>
+                <option>Faisalabad</option>
+                <option>Multan</option>
+                <option>Peshawar</option>
+                <option>Quetta</option>
+                <option>Sialkot</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label">Shipping Address <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="coAddress" rows="2" placeholder="House #, Street, Area..."></textarea>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: Payment Method ── -->
+        <div id="checkoutStep2" style="display:none">
+          <div class="checkout-order-summary" id="checkoutSummary2"></div>
+
+          <div class="checkout-section-title"><i class="bi bi-credit-card-2-front me-2"></i>Choose Payment Method</div>
+
+          <div class="payment-options">
+            <label class="payment-option" for="payCard">
+              <input type="radio" name="payMethod" id="payCard" value="card"/>
+              <div class="payment-option-inner">
+                <div class="payment-icon"><i class="bi bi-credit-card-fill"></i></div>
+                <div class="payment-info">
+                  <div class="payment-name">Credit / Debit Card</div>
+                  <div class="payment-desc">Visa, MasterCard, UnionPay</div>
+                </div>
+                <div class="payment-check"><i class="bi bi-check-circle-fill"></i></div>
+              </div>
+            </label>
+
+            <label class="payment-option" for="payJazz">
+              <input type="radio" name="payMethod" id="payJazz" value="jazzcash"/>
+              <div class="payment-option-inner">
+                <div class="payment-icon jazz"><i class="bi bi-phone-fill"></i></div>
+                <div class="payment-info">
+                  <div class="payment-name">JazzCash</div>
+                  <div class="payment-desc">Pay via JazzCash mobile wallet</div>
+                </div>
+                <div class="payment-check"><i class="bi bi-check-circle-fill"></i></div>
+              </div>
+            </label>
+
+            <label class="payment-option" for="payEasy">
+              <input type="radio" name="payMethod" id="payEasy" value="easypaisa"/>
+              <div class="payment-option-inner">
+                <div class="payment-icon easy"><i class="bi bi-phone-fill"></i></div>
+                <div class="payment-info">
+                  <div class="payment-name">EasyPaisa</div>
+                  <div class="payment-desc">Pay via EasyPaisa mobile wallet</div>
+                </div>
+                <div class="payment-check"><i class="bi bi-check-circle-fill"></i></div>
+              </div>
+            </label>
+
+            <label class="payment-option" for="payBank">
+              <input type="radio" name="payMethod" id="payBank" value="bank"/>
+              <div class="payment-option-inner">
+                <div class="payment-icon bank"><i class="bi bi-bank2"></i></div>
+                <div class="payment-info">
+                  <div class="payment-name">Bank Transfer</div>
+                  <div class="payment-desc">Direct bank deposit / IBFT</div>
+                </div>
+                <div class="payment-check"><i class="bi bi-check-circle-fill"></i></div>
+              </div>
+            </label>
+
+            <label class="payment-option" for="payCOD">
+              <input type="radio" name="payMethod" id="payCOD" value="cod"/>
+              <div class="payment-option-inner">
+                <div class="payment-icon cod"><i class="bi bi-cash-stack"></i></div>
+                <div class="payment-info">
+                  <div class="payment-name">Cash on Delivery</div>
+                  <div class="payment-desc">Pay when you receive the car</div>
+                </div>
+                <div class="payment-check"><i class="bi bi-check-circle-fill"></i></div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Card Details (shown only when card is selected) -->
+          <div id="cardDetails" style="display:none">
+            <div class="checkout-section-title mt-4"><i class="bi bi-lock-fill me-2"></i>Card Information</div>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="coCardNum" placeholder="0000  0000  0000  0000" maxlength="19"/>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" class="form-control" id="coCardExp" placeholder="MM / YY" maxlength="7"/>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">CVV</label>
+                <input type="password" class="form-control" id="coCardCVV" placeholder="•••" maxlength="4"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: Success ── -->
+        <div id="checkoutStep3" style="display:none">
+          <div class="checkout-success">
+            <div class="success-icon-ring">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <h3>Order Placed Successfully!</h3>
+            <p>Thank you for your purchase. Our team will contact you within 24 hours to confirm your order.</p>
+            <div class="success-order-id" id="successOrderId"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer checkout-footer" id="checkoutFooter">
+        <button class="checkout-btn-back" id="coBtnBack" style="display:none"><i class="bi bi-arrow-left me-2"></i>Back</button>
+        <button class="checkout-btn-next" id="coBtnNext"><span>Continue to Payment</span><i class="bi bi-arrow-right ms-2"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TOAST ──────────────────────────────────────────── -->
+<div class="toast-container">
+  <div id="liveToast" class="toast align-items-center">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMsg"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 <span>DealDrive</span> &mdash; Muhammad Faraz | <span>SU92-BSITM-F24-110</span></p>
+</footer>
+
+<!-- ── Scripts (order matters: jQuery → Bootstrap → Data → App) ── -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

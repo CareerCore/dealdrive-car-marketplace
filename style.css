@@ -1,0 +1,236 @@
+/* ── VARIABLES & RESET ─────────────────────────────── */
+:root { --red:#c8392b; --gold:#e8b84b; --glass:rgba(10,10,10,.78); --border:rgba(255,255,255,.1); --nav-h:72px }
+* { margin:0; padding:0; box-sizing:border-box }
+html { scroll-behavior:smooth; scroll-padding-top:var(--nav-h) }
+body { font-family:'Barlow',sans-serif; background:#0d0d0d; color:#f0ece4; overflow-x:hidden }
+::-webkit-scrollbar { width:5px }
+::-webkit-scrollbar-thumb { background:var(--red); border-radius:3px }
+
+/* ── NAVBAR ─────────────────────────────────────────── */
+.navbar { background:rgba(10,10,10,.96); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--border); padding:14px 0; position:fixed; width:100%; top:0; z-index:999; transition:background .3s; align-items:center }
+.navbar > .container { align-items:center }
+.navbar-brand { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--gold)!important }
+.navbar-brand span { color:#fff }
+.nav-link { color:rgba(255,255,255,.92)!important; font-size:12px!important; font-weight:600!important; text-transform:uppercase!important; letter-spacing:1px!important; padding:8px 16px!important; transition:color .2s; position:relative; text-shadow:0 1px 3px rgba(0,0,0,.85) }
+.nav-link::after { content:''; position:absolute; bottom:4px; left:16px; right:16px; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s; transform-origin:left }
+.nav-link:hover::after { transform:scaleX(1) }
+.nav-link:hover { color:#fff!important }
+.btn-saved-nav { background:transparent; border:1.5px solid var(--red); color:var(--red)!important; border-radius:4px; padding:8px 18px!important; font-size:12px!important; font-weight:600!important; transition:all .2s; letter-spacing:.5px!important; text-shadow:none }
+.btn-saved-nav:hover { background:var(--red); color:#fff!important }
+.badge-count { background:var(--gold); color:#0a0a0a; border-radius:50%; width:18px; height:18px; font-size:10px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-left:5px }
+.navbar-toggler { border-color:rgba(255,255,255,.25)!important }
+.navbar-toggler-icon { filter:invert(1) }
+
+/* ── HERO ────────────────────────────────────────────── */
+#hero { position:relative; min-height:100vh; min-height:560px; display:flex; flex-direction:column; overflow:hidden; padding-top:var(--nav-h); box-sizing:border-box }
+#hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.32) saturate(1.3) }
+#particles { position:absolute; inset:0; z-index:1; pointer-events:none }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(10,10,10,.05),rgba(10,10,10,.72)) }
+.hero-center { flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:2; padding:24px 20px 16px; min-height:0 }
+.hero-content { text-align:center; max-width:100% }
+.hero-tag { font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:16px; display:block; animation:fadeIn .8s ease both }
+.hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,12vw,140px); line-height:.92; letter-spacing:3px; color:#fff; animation:fadeInUp .9s .1s ease both; padding-top:.06em }
+.hero-h1 em { color:var(--red); font-style:normal }
+.hero-sub { font-size:clamp(13px,2vw,17px); color:rgba(255,255,255,.74); font-weight:400; margin:22px auto 28px; max-width:450px; line-height:1.75; animation:fadeIn 1s .3s ease both }
+.hero-btn { display:inline-flex; align-items:center; gap:10px; background:var(--red); color:#fff; padding:14px 34px; border-radius:4px; font-weight:600; font-size:14px; letter-spacing:1px; text-decoration:none; transition:all .25s; animation:fadeInUp .9s .45s ease both }
+.hero-btn:hover { background:#a82d20; color:#fff; transform:translateY(-3px); box-shadow:0 14px 36px rgba(200,57,43,.45) }
+.hero-scroll { flex-shrink:0; position:relative; z-index:2; color:rgba(255,255,255,.45); font-size:11px; letter-spacing:3px; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 0 36px; animation:heroScrollBounce 2s 1.5s infinite }
+
+@keyframes fadeInUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+@keyframes heroScrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+/* ── MAIN SECTION ───────────────────────────────────── */
+#main-section { background:#0d0d0d; padding:64px 0 80px }
+.sec-label { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:8px; display:block }
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:3px; color:#fff; line-height:1 }
+.sec-title span { color:var(--red) }
+
+/* ── TABS ────────────────────────────────────────────── */
+.nav-tabs { border:none; background:rgba(255,255,255,.04); border-radius:8px; padding:10px 12px; gap:8px; row-gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:36px }
+.nav-tabs .nav-link { border:none!important; border-radius:6px!important; color:rgba(255,255,255,.62)!important; font-size:11px!important; font-weight:600!important; text-transform:uppercase!important; letter-spacing:1px!important; padding:10px 18px!important; transition:all .22s; white-space:nowrap; text-shadow:none }
+.nav-tabs .nav-link::after { display:none }
+.nav-tabs .nav-link.active { background:var(--red)!important; color:#fff!important }
+.nav-tabs .nav-link:hover:not(.active) { background:rgba(255,255,255,.08)!important; color:#fff!important }
+.tab-content>.tab-pane { animation:fadeIn .35s ease }
+
+/* ── FILTER BAR ─────────────────────────────────────── */
+.filter-bar { background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:8px; padding:16px 20px; margin-bottom:32px; display:flex; flex-wrap:wrap; gap:10px; align-items:center }
+.filter-bar input, .filter-bar select { background:rgba(255,255,255,.07)!important; border:1px solid rgba(255,255,255,.12)!important; color:#fff!important; border-radius:6px!important; font-family:'Barlow',sans-serif!important; font-size:13px!important; padding:10px 14px!important }
+.filter-bar input::placeholder { color:rgba(255,255,255,.3)!important }
+.filter-bar input:focus, .filter-bar select:focus { border-color:var(--red)!important; box-shadow:0 0 0 2px rgba(200,57,43,.2)!important; outline:none!important }
+.filter-bar select option { background:#1a1a1a; color:#fff }
+.res-count { font-size:12px; color:rgba(255,255,255,.35); letter-spacing:.5px; margin-left:auto }
+
+/* ── CAR CARD ───────────────────────────────────────── */
+.car-card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:12px; overflow:hidden; cursor:pointer; transition:transform .3s,box-shadow .3s,border-color .3s; height:100% }
+.car-card:hover { transform:translateY(-8px) scale(1.01); box-shadow:0 24px 60px rgba(0,0,0,.55); border-color:rgba(200,57,43,.55) }
+.car-img-wrap { position:relative; height:175px; overflow:hidden; background:#181818 }
+.car-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .5s; display:block }
+.car-card:hover .car-img-wrap img { transform:scale(1.08) }
+.img-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,10,10,.7),transparent 55%) }
+.car-img-wrap img[src=""], .car-img-wrap img:not([src]) { display:none }
+.img-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg,#1a1a1a,#222); color:rgba(255,255,255,.2); font-size:13px; gap:10px }
+.img-placeholder i { font-size:36px; color:rgba(255,255,255,.15) }
+.c-badge { position:absolute; top:12px; left:12px; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:5px 10px; border-radius:4px; font-weight:700; z-index:2 }
+.b-new { background:var(--red); color:#fff }
+.b-popular { background:var(--gold); color:#0a0a0a }
+.b-ev { background:#27ae60; color:#fff }
+.heart-btn { position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; background:rgba(10,10,10,.75); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all .2s; z-index:2; cursor:pointer }
+.heart-btn:hover, .heart-btn.saved { background:var(--red); border-color:var(--red) }
+.car-body { padding:18px 18px 20px }
+.c-brand { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:4px }
+.c-name { font-family:'Bebas Neue',sans-serif; font-size:23px; letter-spacing:1px; color:#fff; margin-bottom:10px; line-height:1 }
+.c-specs { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px }
+.spec-it { font-size:11px; color:rgba(255,255,255,.42); display:flex; align-items:center; gap:4px }
+.spec-it i { color:var(--red); font-size:11px }
+.c-footer { border-top:1px solid rgba(255,255,255,.07); padding-top:14px; display:flex; align-items:center; justify-content:space-between }
+.c-price { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); letter-spacing:1px }
+.c-price small { font-family:'Barlow',sans-serif; font-size:10px; color:rgba(255,255,255,.28); font-weight:400 }
+.btn-view { background:var(--red); color:#fff; border:none; border-radius:5px; padding:8px 14px; font-size:12px; font-weight:600; letter-spacing:.5px; cursor:pointer; transition:background .2s,transform .15s }
+.btn-view:hover { background:#a82d20; transform:scale(1.04) }
+
+/* ── ABOUT CARDS ────────────────────────────────────── */
+.about-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:28px; transition:transform .3s,border-color .3s; height:100% }
+.about-card:hover { transform:translateY(-4px); border-color:rgba(200,57,43,.45) }
+.about-icon { font-size:34px; color:var(--red); margin-bottom:0; display:block; line-height:1 }
+.about-icon-slot { min-height:48px; display:flex; align-items:flex-start; margin-bottom:14px }
+.about-card h5 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:#fff; margin-bottom:10px }
+.about-card p { font-size:14px; color:rgba(255,255,255,.68); line-height:1.8 }
+.stat-box { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:26px; text-align:center }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:50px; color:var(--gold); letter-spacing:2px; line-height:1 }
+.stat-lbl { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:6px }
+.how-step { display:flex; gap:14px; align-items:flex-start; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.05) }
+.how-step:last-child { border-bottom:none }
+.step-num { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--gold); min-width:32px; line-height:1.2 }
+.step-txt { font-size:14px; color:rgba(255,255,255,.5); line-height:1.6 }
+.cat-box { background:rgba(255,255,255,.04); border-radius:8px; padding:18px 12px; text-align:center; border:1px solid rgba(255,255,255,.06); transition:border-color .2s }
+.cat-box:hover { border-color:rgba(200,57,43,.4) }
+.cat-box i { font-size:26px; color:var(--red); display:block; margin-bottom:8px }
+.cat-box .cat-name { font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; letter-spacing:1px }
+.cat-box .cat-sub { font-size:11px; color:rgba(255,255,255,.3); margin-top:2px }
+
+/* ── CONTACT / CART WRAP ────────────────────────────── */
+.content-wrap { max-width:680px; margin:0 auto; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:36px }
+.form-label { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:6px }
+.form-control, .form-select { background:rgba(255,255,255,.07)!important; border:1px solid rgba(255,255,255,.12)!important; color:#fff!important; border-radius:6px!important; font-family:'Barlow',sans-serif!important; padding:11px 15px!important; font-size:14px!important; transition:border-color .2s }
+.form-control:focus, .form-select:focus { border-color:var(--red)!important; box-shadow:0 0 0 3px rgba(200,57,43,.18)!important }
+.form-control::placeholder { color:rgba(255,255,255,.28)!important }
+.form-select option { background:#1a1a1a; color:#fff }
+.btn-submit { background:var(--red); color:#fff; border:none; border-radius:6px; padding:13px 32px; font-size:14px; font-weight:600; width:100%; cursor:pointer; transition:background .2s,transform .15s }
+.btn-submit:hover { background:#a82d20; transform:translateY(-2px) }
+
+/* ── MODAL ───────────────────────────────────────────── */
+.modal-content { background:#111; border:1px solid rgba(255,255,255,.1); border-radius:12px; overflow:hidden }
+.modal-header { border-bottom:1px solid rgba(255,255,255,.07); padding:18px 24px }
+.modal-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:#fff }
+.btn-close { filter:invert(1)!important; opacity:.5!important }
+.m-img { width:100%; height:270px; object-fit:cover; background:#181818 }
+.modal-body { padding:24px }
+.m-brand { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:4px }
+.m-price { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--red); margin-bottom:14px }
+.m-desc { font-size:14px; color:rgba(255,255,255,.55); line-height:1.75; margin-bottom:20px }
+.spec-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px }
+.spec-box { background:rgba(255,255,255,.05); border-radius:7px; padding:14px; text-align:center }
+.spec-box .sv { font-family:'Bebas Neue',sans-serif; font-size:19px; color:#fff }
+.spec-box .sk { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.38); margin-top:3px }
+.modal-footer { border-top:1px solid rgba(255,255,255,.07); padding:14px 24px; gap:10px }
+.btn-ms { flex:1; background:transparent; border:1.5px solid rgba(255,255,255,.18); color:#fff; border-radius:6px; padding:11px; font-size:13px; font-weight:600; transition:all .2s; cursor:pointer }
+.btn-ms:hover, .btn-ms.saved { border-color:var(--red); background:var(--red); color:#fff }
+.btn-me { flex:2; border:none; color:#fff; border-radius:6px; padding:11px; font-size:13px; font-weight:600; transition:background .2s; cursor:pointer }
+
+/* ── SAVED/CART LIST ITEMS ──────────────────────────── */
+.offcanvas { background:#111!important; border-left:1px solid rgba(255,255,255,.07)!important }
+.offcanvas-header { border-bottom:1px solid rgba(255,255,255,.07)!important; padding:18px 24px!important }
+.offcanvas-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:#fff!important }
+.s-item { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.06) }
+.s-item img { width:70px; height:52px; object-fit:cover; border-radius:6px; background:#1a1a1a }
+.s-name { font-weight:600; font-size:14px; color:#fff }
+.s-price { font-size:12px; color:var(--red); margin-top:3px }
+.btn-rm { background:none; border:none; color:rgba(255,255,255,.28); font-size:17px; cursor:pointer; margin-left:auto; transition:color .2s }
+.btn-rm:hover { color:var(--red) }
+.empty-sv { text-align:center; padding:60px 20px; color:rgba(255,255,255,.28) }
+.empty-sv i { font-size:44px; margin-bottom:14px; display:block; color:rgba(255,255,255,.12) }
+
+/* ── TOAST ───────────────────────────────────────────── */
+.toast-container { position:fixed; bottom:24px; right:24px; z-index:9999 }
+.toast { background:rgba(16,16,16,.96); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.1); border-radius:8px; color:#fff; font-family:'Barlow',sans-serif; font-size:14px }
+
+/* ── FOOTER ─────────────────────────────────────────── */
+footer { background:#060606; border-top:1px solid rgba(255,255,255,.05); padding:30px 0; text-align:center }
+footer p { font-size:12px; color:rgba(255,255,255,.28); margin:0; letter-spacing:.3px }
+footer span { color:var(--gold) }
+
+/* ── CHECKOUT MODAL ─────────────────────────────────── */
+.checkout-modal-content { background:#0e0e0e; border:1px solid rgba(255,255,255,.1); border-radius:14px }
+.checkout-header { border-bottom:1px solid rgba(255,255,255,.07); padding:20px 28px }
+.checkout-step-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:4px }
+.checkout-title { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:2px; color:#fff }
+.checkout-body { padding:28px }
+.checkout-section-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1.5px; color:var(--gold); margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.06) }
+.checkout-order-summary { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:10px; padding:16px 20px; margin-bottom:24px }
+.checkout-order-summary .co-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; font-size:13px; color:rgba(255,255,255,.6) }
+.checkout-order-summary .co-item .co-item-name { flex:1 }
+.checkout-order-summary .co-item .co-item-price { color:var(--red); font-weight:600 }
+.checkout-order-summary .co-total { display:flex; justify-content:space-between; align-items:center; padding-top:12px; margin-top:10px; border-top:1px solid rgba(255,255,255,.08); font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px }
+.checkout-order-summary .co-total .co-total-label { color:#fff }
+.checkout-order-summary .co-total .co-total-price { color:var(--gold) }
+
+/* Payment Options */
+.payment-options { display:flex; flex-direction:column; gap:10px }
+.payment-option { cursor:pointer; display:block }
+.payment-option input[type="radio"] { display:none }
+.payment-option-inner { display:flex; align-items:center; gap:16px; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:10px; padding:16px 20px; transition:all .25s }
+.payment-option:hover .payment-option-inner { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.06) }
+.payment-option input:checked ~ .payment-option-inner { border-color:var(--red); background:rgba(200,57,43,.08); box-shadow:0 0 0 1px var(--red) }
+.payment-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; background:rgba(200,57,43,.15); color:var(--red); flex-shrink:0 }
+.payment-icon.jazz { background:rgba(200,60,20,.15); color:#e84530 }
+.payment-icon.easy { background:rgba(50,180,80,.15); color:#2ecc71 }
+.payment-icon.bank { background:rgba(52,152,219,.15); color:#3498db }
+.payment-icon.cod { background:rgba(232,184,75,.15); color:var(--gold) }
+.payment-info { flex:1 }
+.payment-name { font-weight:600; font-size:14px; color:#fff; margin-bottom:2px }
+.payment-desc { font-size:11px; color:rgba(255,255,255,.38) }
+.payment-check { color:transparent; font-size:20px; transition:color .2s }
+.payment-option input:checked ~ .payment-option-inner .payment-check { color:var(--red) }
+
+/* Checkout Footer */
+.checkout-footer { border-top:1px solid rgba(255,255,255,.07); padding:16px 28px; display:flex; justify-content:space-between; gap:12px }
+.checkout-btn-back { background:transparent; border:1.5px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7); border-radius:8px; padding:12px 24px; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; letter-spacing:.5px }
+.checkout-btn-back:hover { border-color:rgba(255,255,255,.35); color:#fff }
+.checkout-btn-next { background:var(--red); border:none; color:#fff; border-radius:8px; padding:12px 32px; font-size:14px; font-weight:600; cursor:pointer; transition:all .2s; letter-spacing:.5px; margin-left:auto; display:flex; align-items:center }
+.checkout-btn-next:hover { background:#a82d20; transform:translateY(-2px); box-shadow:0 8px 24px rgba(200,57,43,.35) }
+.checkout-btn-next:disabled { opacity:.5; pointer-events:none }
+
+/* Success Screen */
+.checkout-success { text-align:center; padding:40px 20px }
+.success-icon-ring { width:90px; height:90px; border-radius:50%; border:3px solid #2ecc71; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; animation:successPop .5s cubic-bezier(.2,.85,.4,1.275) both }
+.success-icon-ring i { font-size:42px; color:#2ecc71 }
+.checkout-success h3 { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; color:#fff; margin-bottom:10px }
+.checkout-success p { font-size:14px; color:rgba(255,255,255,.5); line-height:1.8; max-width:400px; margin:0 auto 20px }
+.success-order-id { display:inline-block; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:10px 24px; font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; color:var(--gold) }
+
+@keyframes successPop { 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:1} }
+.spin { animation:spinAnim .8s linear infinite }
+@keyframes spinAnim { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* ── SCROLL REVEAL ──────────────────────────────────── */
+.fade-up { opacity:0; transform:translateY(28px); transition:opacity .5s ease,transform .5s ease }
+.fade-up.visible { opacity:1; transform:translateY(0) }
+.d1{transition-delay:.05s} .d2{transition-delay:.12s} .d3{transition-delay:.19s} .d4{transition-delay:.26s}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media(max-width:768px) {
+  .spec-grid { grid-template-columns:repeat(2,1fr) }
+  .filter-bar { flex-direction:column }
+  .filter-bar input,.filter-bar select { width:100% }
+  .res-count { margin-left:0 }
+  .content-wrap { padding:24px 16px }
+  .modal-footer { flex-direction:column }
+  .checkout-body { padding:20px 16px }
+  .checkout-header { padding:16px 20px }
+  .checkout-footer { flex-direction:column; padding:14px 20px }
+  .checkout-btn-next { justify-content:center }
+  .nav-tabs { padding:8px; gap:6px }
+  .nav-tabs .nav-link { padding:9px 12px!important; font-size:10px!important }
+}

@@ -1,7 +1,3 @@
-/* ════════════════════════════════════════════════════
-   data.js — DealDrive Car Data Array
-   ════════════════════════════════════════════════════ */
-
 const CARS = [
   {
     id:1, brand:"Toyota", name:"Land Cruiser Prado",

@@ -23,9 +23,11 @@ This project was built as part of a university assignment to demonstrate front-e
 - jQuery
 
 ## How to Run
-1. Download or clone the repo
-2. Open `index.html` in your browser
-3. Done — no installs needed
+1. save files into foleder 
+2. Create folder named it js and place javascript code files in it
+3. Then Create folder named it css and place style.css file in it
+4. Open `index.html` in your browser
+5. Done — no installs needed
 
 ## Author
 Muhammad Faraz — SU92-BSITM-F24-110

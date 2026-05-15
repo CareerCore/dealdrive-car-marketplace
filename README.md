@@ -28,6 +28,7 @@ This project was built as part of a university assignment to demonstrate front-e
 3. Then Create folder named it css and place style.css file in it
 4. Open `index.html` in your browser
 5. Done — no installs needed
+   
    <img width="680" height="127" alt="image" src="https://github.com/user-attachments/assets/1a0d8f15-302f-4299-86b4-15da80105bb3" />
 
 
